@@ -157,8 +157,89 @@ Agora esta sendo feito em uma camada separada
 
 ### Projeto: ecommerce-api-legacy
 
+**Execução da skill no projeto ecommerce-api-legacy**
+
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-1.png)
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-2.png)
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-3.png)
+
+**Solicitação da execução da Fase 3**
+
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-4.png)
+
+**Final da Refatoração**
+
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-5.png)
+
+**Comparação antes e depois**
+
+
+```
+Antes existia uma God Class 'AppManager.js' que fazia de tudo um pouco
+```
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-6.png)
+
+```
+Depois o projeto ficou bem mais segregado e dividido:
+```
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-7.png)
+
+
+---
+<br>
+
+```
+Antes existia um badCrypto para fazer o hash da senha de forma muito simplista e inseguro
+```
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-8.png)
+
+```
+Agora temos um algoritmo melhor e com salt + scrypt para deixar mais seguro
+```
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-9.png)
+
+
+---
+<br>
+
+```
+Antes era tudo junto a parte de pagamento e auditoria
+```
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-10.png)
+
+```
+Agora temos camadas separadas para fazer o pagamento e outra para fazer a auditoria
+```
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-11.png)
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-12.png)
+
+**Screenshots da aplicação rodando**
+
+![Screenshot](./prints/ecommerce-api-legacy/Refactor-Skill-Ecommerce-Api-Legacy-Part-13.png)
+
+
+
 
 ### Projeto: task-manager-api
+
+
+**Execução da skill no projeto ecommerce-api-legacy**
+
+
+**Solicitação da execução da Fase 3**
+
+
+
+**Final da Refatoração**
+
+
+
+**Comparação antes e depois**
+
+
+
+**Screenshots da aplicação rodando**
+
 
 
 ## Como Executar
