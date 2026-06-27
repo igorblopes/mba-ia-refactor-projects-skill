@@ -225,21 +225,147 @@ Agora temos camadas separadas para fazer o pagamento e outra para fazer a audito
 
 **Execução da skill no projeto ecommerce-api-legacy**
 
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-1.png)
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-2.png)
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-3.png)
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-4.png)
 
 **Solicitação da execução da Fase 3**
 
-
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-6.png)
 
 **Final da Refatoração**
 
-
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-5.png)
 
 **Comparação antes e depois**
 
 
+```
+Antes eram varios itens verificados dentro dos routers
+```
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-7.png)
+
+```
+Depois o projeto esta melhor segregado com a visao de camadas
+```
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-8.png)
+
+
+---
+<br>
+
+```
+Antes os erros eram tratados nos prorios routers
+```
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-10.png)
+
+```
+Depois o projeto ganhou um middleware para cuidar de erros
+```
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-9.png)
+
+---
+<br>
+
+```
+Antes tinhamos nomes de variaveis nao claras e imprecisas
+```
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-11.png)
+
+```
+Depois o projeto possui nomes de variaveis com significado, facilitando a manutencao
+```
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-12.png)
+
 
 **Screenshots da aplicação rodando**
+
+![Screenshot](./prints/task-manager-api/Refactor-Skill-Task-Manager-Api-Part-13.png)
 
 
 
 ## Como Executar
+
+A skill `refactor-arch` roda **dentro do Claude Code**. Ela já vem copiada, idêntica, em cada
+projeto (`<projeto>/.claude/skills/refactor-arch/`), então basta abrir o Claude Code na pasta
+do projeto e invocar o comando `/refactor-arch`.
+
+### Pré-requisitos
+
+- **Claude Code** instalado e autenticado (é ele quem executa a skill).
+- **Python 3.10+** com `pip` — para `code-smells-project` e `task-manager-api` (Flask).
+- **Node.js 18+** com `npm` — para `ecommerce-api-legacy` (Express).
+- **Git** (para clonar/versionar) e um cliente HTTP para validar os endpoints — `curl` ou a
+  extensão REST Client do VS Code (os exemplos ficam em `ecommerce-api-legacy/api.http`).
+
+> Recomendado usar um ambiente virtual nos projetos Python (`python -m venv venv` e ativar)
+> antes de instalar as dependências.
+
+### Executando a skill em cada projeto
+
+Abra o Claude Code **na raiz do projeto** que quer refatorar e rode o comando. A skill executa
+em 3 fases e **pausa na Fase 2** pedindo confirmação (`Prosseguir com a refatoração (Fase 3)? [s/n]`);
+responda `s` para que ela aplique a refatoração, ou `n` para parar apenas no relatório de auditoria.
+
+```bash
+# Projeto 1 — Python/Flask
+cd code-smells-project
+claude            # abra o Claude Code nesta pasta e rode:
+/refactor-arch
+
+# Projeto 2 — Node.js/Express
+cd ecommerce-api-legacy
+claude
+/refactor-arch
+
+# Projeto 3 — Python/Flask (camadas parciais)
+cd task-manager-api
+claude
+/refactor-arch
+```
+
+### Validando que a refatoração funcionou
+
+A própria skill estabelece uma *baseline* (sobe a app e registra os endpoints antes de mudar) e
+revalida boot + endpoints depois. Para conferir você mesmo, suba cada app refatorada e exercite
+as rotas — o contrato público (mesmas rotas, métodos e formato de resposta) deve continuar idêntico.
+
+**code-smells-project** (Flask → `http://localhost:5000`):
+
+```bash
+cd code-smells-project
+pip install -r requirements.txt
+python app.py
+# em outro terminal:
+curl http://localhost:5000/produtos
+```
+
+**ecommerce-api-legacy** (Express → `http://localhost:3000`):
+
+```bash
+cd ecommerce-api-legacy
+npm install
+npm start
+# valide com os exemplos de requisição em api.http (ou via curl)
+```
+
+**task-manager-api** (Flask → `http://localhost:5000`):
+
+```bash
+cd task-manager-api
+pip install -r requirements.txt
+cp .env.example .env     # opcional — ajuste SECRET_KEY e demais variáveis
+python seed.py           # popule o banco ANTES do primeiro boot
+python app.py
+# em outro terminal:
+curl http://localhost:5000/health
+curl http://localhost:5000/tasks
+```
+
+A refatoração é considerada bem-sucedida quando:
+
+- a aplicação **inicia sem erros**;
+- os **mesmos endpoints** da baseline continuam respondendo corretamente;
+- **zero anti-patterns** do relatório permanecem (ou os adiados estão justificados);
+- o relatório de auditoria gerado fica disponível em `reports/` para conferência.

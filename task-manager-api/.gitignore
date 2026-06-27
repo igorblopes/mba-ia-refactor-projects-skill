@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Banco SQLite gerado pelo seed
+tasks.db
+instance/
+
+# Segredos / ambiente
+.env
